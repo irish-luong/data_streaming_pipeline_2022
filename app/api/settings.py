@@ -1,11 +1,9 @@
 import os
 
-from app import settings
-
-
-
+from app.settings import *
 
 # FastAPI application version = '1.0'
+
 
 class ApplicationInfo:
 

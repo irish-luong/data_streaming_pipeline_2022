@@ -10,7 +10,6 @@ from app.api.containers import Container
 from app.api.settings import LOGGING, ApplicationInfo
 
 
-
 def create_app() -> FastAPI:
 
 	# Config log format in project
@@ -20,6 +19,6 @@ def create_app() -> FastAPI:
 	app = FastAPI(
 		version=ApplicationInfo.version,
 		title=ApplicationInfo.title,
-		openapi_tags=ApplicationInfo.LOGGING
+		openapi_tags=ApplicationInfo.tag_metadata
 	)
 
