@@ -3,6 +3,7 @@ import os
 from app.settings import *
 
 # FastAPI application version = '1.0'
+API_KEY = os.getenv("API_KEY", "abc")
 
 
 class ApplicationInfo:
