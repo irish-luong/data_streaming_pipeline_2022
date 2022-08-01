@@ -11,5 +11,4 @@ class InvoiceService:
         Function create invoice item to DB
         """
 
-        logging.info("xxxx")
         logging.info(data)
