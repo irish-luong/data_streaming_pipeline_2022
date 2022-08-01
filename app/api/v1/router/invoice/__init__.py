@@ -16,8 +16,8 @@ from app.api.v1.router.invoice.model import InvoiceItemInput, InvoiceItemOutput
 # Init router objects
 router = APIRouter(
     prefix='/api/v1/invoice',
-    tags=['e-invoice'],
-    responses={404: {"message": "Algorithm configurations not found"}}
+    tags=['invoice'],
+    responses={404: {"message": "Invoice not found"}}
 )
 
 
