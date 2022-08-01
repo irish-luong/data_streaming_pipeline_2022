@@ -3,6 +3,7 @@ test_api:
 	@echo ${PYTHONPATH};
 	pytest app/api/v1
 
-setup:
-	@echo "Set up virtual environment"
+start_app:
+	uvicorn app.api.main:app --host 0.0.0.0 --port 5000 --reload
+
 	
