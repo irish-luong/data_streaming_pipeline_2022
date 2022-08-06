@@ -19,18 +19,18 @@ class InvoiceItem(BaseModel):
 
 class InvoiceItemInput(InvoiceItem):
 
-    InvoiceDate: str = Field(description="Format %d/%m/%Y %H:%M")
+    InvoiceDate: str = Field(description="Format %d/%m/%Y %H:%M:%S")
 
     @validator('InvoiceDate')
     def validate_invoice_date(cls, v):
         try:
-            date = datetime.datetime.strptime(v, "%d/%m/%Y %H:%M")
+            date = datetime.datetime.strptime(v, "%d/%m/%Y %H:%M:%S")
         except:
-            raise ValueError('Invoice date must be in format %d/%m/%Y %H:%M')
+            raise ValueError('Invoice date must be in format %d/%m/%Y %H:%M:%S')
         else:
-            return date.strftime("%Y-%m-%d %H:%m")
+            return date.strftime("%Y-%m-%d %H:%M:%S")
 
 
 class InvoiceItemOutput(InvoiceItem):
 
-    InvoiceDate: str = Field(description="Format %Y-%m-%d %H:%m")
+    InvoiceDate: str = Field(description="Format %Y-%m-%d %H:%M:%S")

@@ -10,7 +10,7 @@
 
 
 ## Pipeline Desgin 
-![](streaming_pipeline.drawio.png)
+![](./static/streaming_pipeline.drawio.png)
 
 
 ## Prerequitesite
@@ -32,4 +32,6 @@ $ source venv/bin/activate;
 
 ## Reference
 1. [Streaming data from Postgres to Kafka by Debezium](https://arctype.com/blog/kafka-tutorial-1/)
-
+2. [Spark and Scala3](https://www.47deg.com/blog/using-scala-3-with-spark/)
+3. [Spark Docker](https://dev.to/mvillarrealb/creating-a-spark-standalone-cluster-with-docker-and-docker-compose-2021-update-6l4)
+4. [Spark Submit](https://spark.apache.org/docs/latest/submitting-applications.html)
