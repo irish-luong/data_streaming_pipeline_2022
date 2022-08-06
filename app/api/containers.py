@@ -5,7 +5,9 @@ from dependency_injector import containers, providers
 
 
 # Project modules
+from app.settings import BOOTSTRAP_SERVERS
 from libs.services import InvoiceService
+from libs.adapters.message_broker.kafka.producer import Producer
 
 
 class Container(containers.DeclarativeContainer):
@@ -15,4 +17,6 @@ class Container(containers.DeclarativeContainer):
 			'.v1.router.invoice'
 		])
 
-	invoice_service = providers.Factory(InvoiceService)
+	producer = providers.Singleton(Producer, bootstrap_servers=BOOTSTRAP_SERVERS)
+
+	invoice_service = providers.Factory(InvoiceService, producer=producer)

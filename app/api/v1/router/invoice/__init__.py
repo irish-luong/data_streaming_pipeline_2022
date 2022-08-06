@@ -1,8 +1,11 @@
 # Pure Python libraries
 import datetime
+import json
 import logging
 
 # 3PL modules
+import time
+
 from dependency_injector.wiring import inject, Provide
 
 # Framework modules
@@ -29,9 +32,8 @@ async def create_invoice(
 ):
 
     invoice_json = jsonable_encoder(invoice)
+    logging.info(invoice_json)
+    await service.public_invoice('test', time.time().__str__(), json.dumps(invoice_json))
 
-    await service.public_invoice(invoice_json)
-
-    logging.info(invoice)
     return invoice
 

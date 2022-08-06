@@ -5,6 +5,9 @@ print('Welcome to streaming application')
 # Core configurations
 DEBUG = os.getenv('DEBUG', 'false') == 'true'
 
+# Broker configuration
+BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:9092")
+
 LOGGING = {
         "version": 1,
         "disable_existing_loggers": True,
