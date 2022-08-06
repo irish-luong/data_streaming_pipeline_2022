@@ -1,3 +1,7 @@
+#Spark streaming configuration
+app/streaming/checkpoint
+app/streaming/.idea/**
+
 #
 # Are you tempted to edit this file?
 #
