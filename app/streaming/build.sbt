@@ -20,4 +20,8 @@ libraryDependencies ++= Seq(
   ("org.apache.hadoop" % "hadoop-client" % sparkVersion)
 )
 
+// Scala testing modules
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.3.0-SNAP3" % Test
+
+
 //Compile / run := Defaults.runTask(Compile / fullClasspath, Compile / run / mainClass, Compile / run / runner).evaluated
