@@ -26,7 +26,7 @@ import entity.ConsumingTask;
 * 2. Set pool size of this consumer to thread pool executor
 * 3.
 * */
-public class ReplicationService implements ConsumerRebalanceListener {
+public class ReplicationService implements Runnable, ConsumerRebalanceListener {
 
     // Kafka topic pattern
     public String topicPattern = null;
@@ -59,6 +59,7 @@ public class ReplicationService implements ConsumerRebalanceListener {
         return this;
     }
 
+    @Override
     public void run() {
         try {
             consumer.subscribe(Collections.singleton(this.topicPattern), this);

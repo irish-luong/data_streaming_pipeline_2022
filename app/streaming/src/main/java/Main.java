@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 // Project modules
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import services.ReplicationService;
 
@@ -16,6 +17,8 @@ public class Main {
     private static final Logger logger = Logger.getLogger(ReplicationService.class);
 
     public static void main(String[] args) {
+
+        BasicConfigurator.configure();
 
         // Kafka configuration
         Properties kafkaConfig = new Properties();
@@ -28,6 +31,7 @@ public class Main {
 
         logger.info(kafkaConfig);
         ReplicationService svc = new ReplicationService("factor", kafkaConfig, 4);
-        svc.run();
+        Thread t1 = new Thread(svc);
+        t1.start();
     }
 }
