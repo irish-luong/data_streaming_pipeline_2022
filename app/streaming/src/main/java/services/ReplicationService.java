@@ -2,8 +2,7 @@ package services;
 
 import interfaces.KafkaTask;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
@@ -27,7 +26,7 @@ import entity.ConsumingTask;
 * 2. Set pool size of this consumer to thread pool executor
 * 3.
 * */
-public class ReplicationService implements Runnable, ConsumerRebalanceListener {
+public class ReplicationService implements ConsumerRebalanceListener {
 
     // Kafka topic pattern
     public String topicPattern = null;
@@ -42,7 +41,7 @@ public class ReplicationService implements Runnable, ConsumerRebalanceListener {
     private final Map<TopicPartition, OffsetAndMetadata> offsetsToCommit = new HashMap<>();
 
     // Implement logger object to implement log
-    private final Logger logger = LoggerFactory.getLogger(ReplicationService.class);
+    private final Logger logger = Logger.getLogger(ReplicationService.class);
 
     // Initialize a last commit time to take a short break. Which avoid
     // calling Kafka too much lead to harass system
@@ -60,27 +59,31 @@ public class ReplicationService implements Runnable, ConsumerRebalanceListener {
         return this;
     }
 
-    @Override
     public void run() {
         try {
             consumer.subscribe(Collections.singleton(this.topicPattern), this);
 
-            // Start an infinity loop to pool message from message broker
-            ConsumerRecords<String, String> records = consumer.poll(Duration.of(100, ChronoUnit.MILLIS));
+            logger.info(consumer.toString());
+            while(!stopped.get()) {
+                // Start an infinity loop to pool message from message broker
+                ConsumerRecords<String, String> records = consumer.poll(Duration.of(100, ChronoUnit.MILLIS));
 
-            // Handle records fetched
-            handleFetchedRecords(records);
+                // Handle records fetched
+                handleFetchedRecords(records);
 
-            // Check finished tasks to resume consumer for continuing fetch records
-            checkActiveTasks();
+                // Check finished tasks to resume consumer for continuing fetch records
+                checkActiveTasks();
 
-            // Commit all offset of all assigned partitions
-            commitOffset();
+                // Commit all offset of all assigned partitions
+                commitOffset();
+            }
 
         } catch (WakeupException we) {
             if (!stopped.get()) {
                 throw we;
             }
+        } finally {
+            consumer.close();
         }
     }
 

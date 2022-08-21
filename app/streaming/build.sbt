@@ -24,4 +24,8 @@ libraryDependencies ++= Seq(
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.3.0-SNAP3" % Test
 
 
+// Logging
+libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.18.0"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-core" % "2.18.0"
+
 //Compile / run := Defaults.runTask(Compile / fullClasspath, Compile / run / mainClass, Compile / run / runner).evaluated
